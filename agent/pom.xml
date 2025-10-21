@@ -11,6 +11,7 @@
   <url>http://maven.apache.org</url>
     <modules>
         <module>mcpServer</module>
+        <module>starter-common</module>
     </modules>
 
     <properties>

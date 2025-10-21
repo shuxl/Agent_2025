@@ -5,7 +5,7 @@
 
     <groupId>com.lance</groupId>
     <artifactId>mcpServer</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>mcpServer</name>
@@ -40,6 +40,12 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>com.lance</groupId>
+            <artifactId>starter-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
