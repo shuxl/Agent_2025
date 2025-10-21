@@ -14,7 +14,7 @@ spring.ai.mcp.server.sse-message-endpoint=/mcp/message
 spring.ai.mcp.server.protocol=STREAMABLE
 # spring.ai.mcp.server.protocol=STATELESS
 
-logging.file.name=./model-context-protocol/weather/starter-webmvc-server/target/starter-webmvc-server.log
+#logging.file.name=./model-context-protocol/weather/starter-webmvc-server/target/starter-webmvc-server.log
 
 
 # Avoid clobbering the default JSESSIONID cookie for other apps when running on localhost
