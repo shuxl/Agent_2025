@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR:}
+        namespace: ${NACOS_NS:}
+        register-enabled: true
+      config:
+        prefix: pd-chat
+        file-extension: yaml
+        server-addr: ${NACOS_ADDR:}
+        namespace: ${NACOS_NS:}
+        accessKey: ${NACOS_AK:}
+        secretKey: ${NACOS_SK:}
+        refresh-enabled: true
+        enabled: true

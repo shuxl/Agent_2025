@@ -1,0 +1,61 @@
+# 文件: bootstrap-local.yml
+# 这个文件专门用于本地开发，存放所有需要连接的远程环境的凭证。
+# 它不会被打包或部署到服务器。
+
+# --- 文档1: 当 test profile 被激活时，使用以下配置 ---
+spring:
+  config:
+    activate:
+      on-profile: test # 只有当 "test" profile 激活时，下面的配置才生效
+  cloud:
+    nacos:
+      discovery:
+        server-addr: mse-e4403e30-nacos-ans.mse.aliyuncs.com:8848  # test
+        namespace: 59ff36f2-7926-4917-8062-b5925a5e0fed  # test
+        register-enabled: false
+      config:
+        prefix: pd-chat
+        file-extension: yaml
+        shared-configs:
+          - dataId: pd-chat-test.yaml
+            group: DEFAULT_GROUP
+        server-addr: mse-e4403e30-nacos-ans.mse.aliyuncs.com:8848  # test
+        namespace: 59ff36f2-7926-4917-8062-b5925a5e0fed  # test
+        accessKey: ${NACOS_ACCESS_KEY_TEST}  # test
+        secretKey: ${NACOS_SECRET_KEY_TEST}  # test
+
+---
+# --- 文档2: 当 uat profile 被激活时，使用以下配置 ---
+spring:
+  config:
+    activate:
+      on-profile: uat # 只有当 "uat" profile 激活时，下面的配置才生效
+  cloud:
+    nacos:
+      discovery:
+        server-addr: mse-4e0990b0-nacos-ans.mse.aliyuncs.com:8848  # uat
+        namespace: e66c67ce-8e0f-4962-a40f-12a44c15a75d  # uat
+        register-enabled: false
+      config:
+        prefix: pd-chat
+        file-extension: yaml
+        shared-configs:
+          - dataId: pd-chat-uat.yaml
+            group: DEFAULT_GROUP
+          - data-id: wecom-service.yaml
+            group: DEFAULT_GROUP
+        server-addr: mse-4e0990b0-nacos-ans.mse.aliyuncs.com:8848  # uat
+        namespace: e66c67ce-8e0f-4962-a40f-12a44c15a75d  # uat
+        accessKey: ${NACOS_ACCESS_KEY_UAT}  # uat
+        secretKey: ${NACOS_SECRET_KEY_UAT}  # uat
+
+model:
+  api:
+    innerModelUrl:  https://uat-internal.gezhijiankang.com/intelli-analysis/api/v1/chat/invoke
+
+aliyun:
+  accessKey: ${devops.aliyun.ram.accessKey}
+  secretKey: ${devops.aliyun.ram.secretKey}
+  rocketmq:
+    accessKey: ${devops.aliyun.ram.accessKey}
+    secretKey: ${devops.aliyun.ram.secretKey}
