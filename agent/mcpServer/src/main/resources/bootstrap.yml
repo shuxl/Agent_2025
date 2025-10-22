@@ -12,6 +12,11 @@ spring:
     allow-bean-definition-overriding: true
     allow-circular-references: true
     banner-mode: off
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+        register-enabled: false
   aop:
     proxy-target-class: true
   mcp:
