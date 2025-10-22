@@ -6,6 +6,7 @@ import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.function.FunctionToolCallback;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -17,6 +18,9 @@ import org.springframework.context.annotation.Import;
  */
 @SpringBootApplication
 @Import(McpToolConfiguration.class)
+@EnableFeignClients(basePackages = {
+        "com.lance.service.feign.**"
+})
 public class McpServerApp {
     
     public static void main(String[] args) {

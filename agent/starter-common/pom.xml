@@ -34,5 +34,10 @@
             <artifactId>viatris-starter-nacos</artifactId>
             <version>1.x-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.viatris.framework</groupId>
+            <artifactId>viatris-web</artifactId>
+            <version>1.x-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
