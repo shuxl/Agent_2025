@@ -1,7 +1,7 @@
 
 package com.lance.service.feign.blood.pressure;
 
-//import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  *         </dependency>
  */
 
-//@FeignClient(
-//    value = "blood-pressure-service",
-//    path = "/doctorWorkbench"
-//)
+@FeignClient(
+    value = "blood-pressure-service",
+    path = "/doctorWorkbench"
+)
 public interface DoctorWorkbenchServiceApi {
 
     @GetMapping({"getBindDoctorId"})

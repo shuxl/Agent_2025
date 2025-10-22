@@ -1,5 +1,7 @@
 package com.lance.controller;
 
+import com.lance.service.DoctorWorkbenchService;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,14 @@ import java.util.Map;
 @RequestMapping("/api/mcp")
 public class McpController {
 
+    @Resource
+    private DoctorWorkbenchService doctorWorkbenchService;
+
+
+    @GetMapping("/doctor/workbench/bind")
+    public Object getBindDoctorId(Long patientId) {
+        return doctorWorkbenchService.getBindDoctorId(patientId);
+    }
     @GetMapping("/status")
     public Map<String, Object> getStatus() {
         Map<String, Object> status = new HashMap<>();

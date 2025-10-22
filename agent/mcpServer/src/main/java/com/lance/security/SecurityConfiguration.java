@@ -1,42 +1,38 @@
-///*
-// * Copyright 2025 - 2025 the original author or authors.
-// *
-// * Licensed under the Apache License, Version 2.0 (the "License");
-// * you may not use this file except in compliance with the License.
-// * You may obtain a copy of the License at
-// *
-// * https://www.apache.org/licenses/LICENSE-2.0
-// *
-// * Unless required by applicable law or agreed to in writing, software
-// * distributed under the License is distributed on an "AS IS" BASIS,
-// * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// * See the License for the specific language governing permissions and
-// * limitations under the License.
-// */
-//package com.lance.security;
-//
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.config.Customizer;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
-//import org.springframework.security.web.SecurityFilterChain;
-//
-//import static org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer.authorizationServer;
-//
-//@Configuration
-//@EnableWebSecurity
-//class SecurityConfiguration {
-//
-//	@Bean
-//	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//		return http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-//			.with(authorizationServer(), Customizer.withDefaults())
-//			.oauth2ResourceServer(resource -> resource.jwt(Customizer.withDefaults()))
-//			.csrf(CsrfConfigurer::disable)
-//			.cors(Customizer.withDefaults())
-//			.build();
-//	}
-//
-//}
+package com.lance.security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.web.SecurityFilterChain;
+
+/**
+ * Security Configuration - 允许API端点公开访问
+ * 
+ * @author lance
+ */
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+            .authorizeHttpRequests(auth -> auth
+                // 允许所有API端点公开访问
+                .requestMatchers("/api/**").permitAll()
+                // 允许健康检查端点
+                .requestMatchers("/actuator/**").permitAll()
+                // 允许MCP相关端点
+                .requestMatchers("/mcp/**").permitAll()
+                // 允许SSE端点（如果需要认证，可以单独配置）
+                .requestMatchers("/sse").permitAll()
+                // 其他请求需要认证
+                .anyRequest().authenticated()
+            )
+            .csrf(CsrfConfigurer::disable)
+            .cors(cors -> cors.disable())
+            .build();
+    }
+}
